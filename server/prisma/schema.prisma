@@ -1,0 +1,75 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime   @default(now())
+  firstName String?
+  id        String     @id @default(cuid())
+  lastName  String?
+  newsItems NewsItem[]
+  password  String
+  roles     String[]
+  updatedAt DateTime   @updatedAt
+  username  String     @unique
+}
+
+model Diary {
+  createdAt DateTime  @default(now())
+  date      DateTime?
+  id        String    @id @default(cuid())
+  updatedAt DateTime  @updatedAt
+}
+
+model NewsItem {
+  body        String?
+  contacts    Contact?            @relation(fields: [contactsId], references: [id])
+  contactsId  String?
+  createdAt   DateTime            @default(now())
+  createdBy   User?               @relation(fields: [createdById], references: [id])
+  createdById String?
+  id          String              @id @default(cuid())
+  slug        String
+  status      EnumNewsItemStatus?
+  tags        EnumNewsItemTags?
+  updatedAt   DateTime            @updatedAt
+}
+
+model Contact {
+  cellphoneNumber Int?
+  company         String?
+  createdAt       DateTime   @default(now())
+  id              String     @id @default(cuid())
+  lastUsed        NewsItem[]
+  name            String
+  surname         String
+  updatedAt       DateTime   @updatedAt
+}
+
+enum EnumNewsItemStatus {
+  Published
+  Draft
+  Expired
+}
+
+enum EnumNewsItemTags {
+  Politiek
+  Misdaad
+  Finansies
+  Hofsake
+  Omgewing
+  Vermaak
+  Sport
+  Ongelukke
+  Dagboek
+  Internasionaal
+  Tegnologie
+  Gesondheid
+  Arbeid
+  Plaaslik
+}
