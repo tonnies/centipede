@@ -1,0 +1,16 @@
+export enum EnumNewsItemTags {
+  Politiek = "Politiek",
+  Misdaad = "Misdaad",
+  Finansies = "Finansies",
+  Hofsake = "Hofsake",
+  Omgewing = "Omgewing",
+  Vermaak = "Vermaak",
+  Sport = "Sport",
+  Ongelukke = "Ongelukke",
+  Dagboek = "Dagboek",
+  Internasionaal = "Internasionaal",
+  Tegnologie = "Tegnologie",
+  Gesondheid = "Gesondheid",
+  Arbeid = "Arbeid",
+  Plaaslik = "Plaaslik",
+}
